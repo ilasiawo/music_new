@@ -2,9 +2,17 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:music_new/services/audio_query_handler.dart';
 
-class PlayerController extends GetxController {
-  final audioQuery = OnAudioQuery();
+/// audio state management class
+/// contains all audioFiles, currentPlayerAudio, playerState
+///
+/// func
+///   next()
+///   previous()
+///   playNPause()
+///   ...
+class PlayerState extends GetxController {
   final audioPlayer = AudioPlayer();
   var playIndex = 0.obs;
   var isPlaying = false.obs;
@@ -15,7 +23,7 @@ class PlayerController extends GetxController {
     checkPermission();
   }
 
-  playSong(String? uri, index) {
+  void playSong(String? uri, index) {
     playIndex.value = index;
     try {
       audioPlayer.setAudioSource(
@@ -28,11 +36,15 @@ class PlayerController extends GetxController {
     }
   }
 
-  checkPermission() async {
+  void checkPermission() async {
     var perm = await Permission.storage.request();
     if (perm.isGranted) {
     } else {
       checkPermission();
     }
+  }
+
+  Future<List<SongModel>> getDeviceAudios() async {
+    return AudioQueryHandler().getDeviceAudios();
   }
 }
