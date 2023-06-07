@@ -1,17 +1,13 @@
-import 'dart:math';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:music_new/const/color.dart';
 import 'package:music_new/const/text_style.dart';
+import 'package:music_new/views/player.dart';
 import 'package:music_new/state/player_state.dart';
 import 'package:music_new/services/audio_query_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+
+import '../state/player_state.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -28,7 +24,7 @@ class Home extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              Icons.search,
+              Icons.music_note_sharp,
               color: whiteColor,
             ),
           )
@@ -94,6 +90,10 @@ class Home extends StatelessWidget {
                               )
                             : null,
                         onTap: () {
+                          Get.to(
+                                () => Player(data: snapshot.data!),
+                            transition: Transition.downToUp,
+                          );
                           playerState.playSong(snapshot.data![index].uri, index);
                         },
                       ),

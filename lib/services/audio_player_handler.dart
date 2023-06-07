@@ -12,6 +12,4 @@ class AudioPlayerHandler {
   }
 
   final audioPlayer = AudioPlayer();
-
-
 }
