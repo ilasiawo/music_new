@@ -82,11 +82,11 @@ flutter:
   fonts:
     - family: bold
       fonts:
-        - asset: assets/bold.otf
+        - asset: assets/fonts//bold.otf
        
     - family: regular
       fonts:
-        - asset: assets/regular.otf
+        - asset: assets/fonts/regular.otf
        
   #   - family: Trajan Pro
   #     fonts:
