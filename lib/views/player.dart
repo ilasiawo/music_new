@@ -75,11 +75,11 @@ class Player extends StatelessWidget {
                       const SizedBox(
                         height: 12,
                       ),
-                    
                       Obx(
                         () => Row(
                           children: [
-                            Text(  playerState.position.value, style: ourStyle(color: bgDarkColor)),
+                            Text(playerState.position.value,
+                                style: ourStyle(color: bgDarkColor)),
                             Expanded(
                               child: Slider(
                                 thumbColor: sliderColor,
