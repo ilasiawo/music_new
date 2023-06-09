@@ -6,7 +6,6 @@ import 'package:music_new/views/player_page.dart';
 import 'package:music_new/state/player_state.dart';
 import 'package:music_new/services/audio_query_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import '../state/player_state.dart';
 
 class Home extends StatefulWidget {
@@ -51,7 +50,7 @@ class _HomeState extends State<Home> {
               Icons.music_note_sharp,
               color: whiteColor,
             ),
-          )
+          ),
         ],
         leading: const Icon(
           Icons.sort_rounded,
@@ -84,7 +83,6 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(8.0),
                 physics: const BouncingScrollPhysics(),
                 itemCount: songs.length,
-                //itemCount: 2,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 4),

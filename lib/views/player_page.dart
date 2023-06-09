@@ -176,6 +176,113 @@ class _PlayerPageState extends State<PlayerPage> {
                       )
                     ],
                   ),
+                  //   color: whiteColor,
+                  //   borderRadius: BorderRadius.vertical(
+                  //     top: Radius.circular(16),
+                  //   ),
+                  // ),
+                  // child: Obx(
+                  //   () {
+                  //     return Column(
+                  //       children: [
+                  //         Text(
+                  //           songs[playerState.playIndex.value].displayNameWOExt,
+                  //           textAlign: TextAlign.center,
+                  //           overflow: TextOverflow.ellipsis,
+                  //           maxLines: 2,
+                  //           style: ourStyle(
+                  //               color: bgDarkColor, family: bold, size: 24),
+                  //         ),
+                  //         const SizedBox(
+                  //           height: 12,
+                  //         ),
+                  //         Text(
+                  //           songs[playerState.playIndex.value].artist.toString(),
+                  //           style: ourStyle(
+                  //               color: bgDarkColor, family: regular, size: 20),
+                  //         ),
+                  //         const SizedBox(
+                  //           height: 12,
+                  //         ),
+                  //         // slider
+                  //         Obx(
+                  //           () => Row(
+                  //             children: [
+                  //               Text(
+                  //                 playerState.position.value,
+                  //                 style: ourStyle(color: bgDarkColor),
+                  //               ),
+                  //               Expanded(
+                  //                 child: Slider(
+                  //                   thumbColor: sliderColor,
+                  //                   inactiveColor: bgColor,
+                  //                   min: const Duration(seconds: 0)
+                  //                       .inSeconds
+                  //                       .toDouble(),
+                  //                   max: playerState.max.value,
+                  //                   activeColor: sliderColor,
+                  //                   value: playerState.value.value,
+                  //                   onChanged: (newValue) {
+                  //                     playerState.changeDurationToSeconds(
+                  //                         newValue.toInt());
+                  //                     newValue = newValue;
+                  //                   },
+                  //                 ),
+                  //               ),
+                  //               Text(
+                  //                 playerState.duration.value,
+                  //                 style: ourStyle(color: bgDarkColor),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //
+                  //         const SizedBox(height: 12),
+                  //         // pause/play/next etc
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //           children: [
+                  //             IconButton(
+                  //               onPressed: () {
+                  //                 playerState.playPrevious();
+                  //               },
+                  //               icon: const Icon(
+                  //                 Icons.skip_previous_rounded,
+                  //                 size: 28,
+                  //               ),
+                  //             ),
+                  //             Obx(
+                  //               () {
+                  //                 return CircleAvatar(
+                  //                   radius: 35,
+                  //                   backgroundColor: bgDarkColor,
+                  //                   child: Transform.scale(
+                  //                     scale: 2.5,
+                  //                     child: IconButton(
+                  //                       onPressed: () {
+                  //                         playerState.playPause();
+                  //                       },
+                  //                       icon: playerState.isPlaying.value
+                  //                           ? const Icon(Icons.pause)
+                  //                           : const Icon(
+                  //                               Icons.play_arrow_rounded),
+                  //                     ),
+                  //                   ),
+                  //                 );
+                  //               },
+                  //             ),
+                  //             IconButton(
+                  //               onPressed: () {
+                  //                 playerState.playNext();
+                  //               },
+                  //               icon:
+                  //                   const Icon(Icons.skip_next_rounded, size: 28),
+                  //             ),
+                  //           ],
+                  //         )
+                  //       ],
+                  //     );
+                  //   },
                 ),
               ),
             ),
