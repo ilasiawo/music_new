@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 
 /// it plays audio given audio source
-
 class AudioPlayerHandler {
   static AudioPlayerHandler? _instance;
   AudioPlayerHandler._() {
@@ -23,7 +22,17 @@ class AudioPlayerHandler {
   }
 
   void _init() {}
-  void pause() {}
-  void play() {}
-  void updatePosition(double pos) {}
+
+  void pausePlay() {}
+
+  void playNewSong(String uri) {
+    _audioPlayer.setAudioSource(
+      AudioSource.uri(Uri.parse(uri)),
+    );
+    _audioPlayer.play();
+  }
+
+  void updatePosition(Duration pos) {
+    _audioPlayer.seek(pos);
+  }
 }

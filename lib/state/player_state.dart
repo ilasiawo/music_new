@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_new/services/audio_player_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:music_new/services/audio_query_handler.dart';
@@ -15,7 +16,6 @@ import 'package:music_new/services/audio_query_handler.dart';
 ///   playNPause()
 ///   ...
 class PlayerState extends GetxController {
-  final audioPlayer = AudioPlayer();
   var playIndex = 0.obs;
   var isPlaying = false.obs;
 
@@ -25,6 +25,7 @@ class PlayerState extends GetxController {
   var max = 0.0.obs;
   var value = 0.0.obs;
 
+  final _playerHandler = AudioPlayerHandler();
   final _songsCompleter = Completer<bool>();
   List<SongModel> _songs = [];
 
@@ -37,14 +38,21 @@ class PlayerState extends GetxController {
     checkPermission();
   }
 
-  updatePosition() {
-    audioPlayer.durationStream.listen(
+  @override
+  void dispose() {
+    _playerHandler.dispose();
+
+    super.dispose();
+  }
+
+  void updatePosition() {
+    _playerHandler.durationStream.listen(
       (d) {
         duration.value = d.toString().split(".")[0];
         max.value = d!.inSeconds.toDouble();
       },
     );
-    audioPlayer.positionStream.listen(
+    _playerHandler.positionStream.listen(
       (p) {
         position.value = p.toString().split(".")[0];
         value.value = p.inSeconds.toDouble();
@@ -54,28 +62,25 @@ class PlayerState extends GetxController {
 
   void changeDurationToSeconds(seconds) {
     var duration = Duration(seconds: seconds);
-    audioPlayer.seek(duration);
+    _playerHandler.updatePosition(duration);
   }
 
-  void playSong(String? uri, index) {
+  /// changes the song
+  void playSong(String uri, index) {
     // final nSong = songs[index];
     playIndex.value = index;
-    try {
-      audioPlayer.setAudioSource(
-        AudioSource.uri(Uri.parse(uri!)),
-      );
-      audioPlayer.play();
-      isPlaying.value = true;
-      updatePosition();
-      // ignore: empty_catches
-    } on Exception {}
+    _playerHandler.playNewSong(uri);
+    isPlaying.value = true;
+    updatePosition();
+    // ignore: empty_catches
   }
 
   void playNext() {
     final curIndex = playIndex.value;
     final nIndex = (curIndex + 1) % songs.length;
     final nSong = songs[nIndex];
-    playSong(nSong.uri, nIndex);
+
+    playSong(nSong.uri!, nIndex);
   }
 
   void checkPermission() async {
@@ -88,7 +93,7 @@ class PlayerState extends GetxController {
 
   Future loadDeviceAudios() async {
     final songs = await AudioQueryHandler().getDeviceAudios();
-    _songs = songs;
+    _songs = songs.where((song) => song.uri != null).toList(growable: false);
     _songsCompleter.complete(true);
   }
 }
